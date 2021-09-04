@@ -23,13 +23,25 @@ public final class Constants {
 
     public static final class IOConstants {
         public static final int DRIVE_CONTROLLER_PORT = 0;
-        public static final int JOYSTICK_X_AXIS = 0;
-        public static final int JOYSTICK_Y_AXIS = 1;
+        public static final int SECONDARY_CONTROLLER_PORT = 1;
+
+        // probably dont need these
+        //public static final int JOYSTICK_X_AXIS = 0;
+        //public static final int JOYSTICK_Y_AXIS = 1;
+
+
+
+    
         
     }
 
     public static final class ElevatorConstants {
         public static final int TOP_ACTUATOR = 0;
         public static final int BOTTOM_ACUATOR = 1;
+
+        public static final int BOTTOM_POTENTIOMETER_PORT = 0;
+        public static final int TOP_POTENTIOMETER_PORT = 1;
+
+        public static final double LIFT_MOTOR_SPEED = 0.5;
     }
 }
