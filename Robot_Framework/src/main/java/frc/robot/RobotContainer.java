@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //Subsystems
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ElevatorSystem;
+import frc.robot.subsystems.IOSubsystem;
 
 //Constants
 import frc.robot.Constants.IOConstants;
@@ -21,6 +22,9 @@ import frc.robot.Constants.IOConstants;
 //Commands
 import frc.robot.commands.drive.CartesianDrive;
 import frc.robot.commands.elevator.Raise;
+import frc.robot.commands.elevator.Lower;
+import frc.robot.commands.elevator.ManualMove;
+import frc.robot.commands.io.ToggleSafe;
 
 
 /**
@@ -32,22 +36,26 @@ import frc.robot.commands.elevator.Raise;
 public class RobotContainer {
 
   private final DriveSystem _drive = new DriveSystem();
+  private final ElevatorSystem _elevator = new ElevatorSystem();
+  private final IOSubsystem _io = new IOSubsystem();
 
   private final Joystick driver_controller = new Joystick(IOConstants.DRIVE_CONTROLLER_PORT);
-
   private final Joystick secondary_controller = new Joystick(IOConstants.SECONDARY_CONTROLLER_PORT);
-
-  private final ElevatorSystem _elevator = new ElevatorSystem();
-
   private final XboxController ElevatorController = new XboxController(IOConstants.ELEVATOR_CONTROLLER_PORT);
 
-  private final Raise raise = new Raise(_elevator);
+  private final Command raise = new Raise(_elevator);
+  private final Command lower = new Lower(_elevator);
+  private final Command safemodetoggle = new ToggleSafe(_io);
 
   private final JoystickButton _AButton = new JoystickButton(ElevatorController, IOConstants.A_BUTTON);
+  private final JoystickButton _YButton = new JoystickButton(ElevatorController, IOConstants.Y_BUTTON);
+  private final JoystickButton _StartButton = new JoystickButton(ElevatorController, IOConstants.START);
+  
   
   public RobotContainer() {
     
     _drive.setDefaultCommand(new CartesianDrive(driver_controller.getX(), driver_controller.getY(), secondary_controller.getX(), _drive));
+    _elevator.setDefaultCommand(new ManualMove(_elevator, ElevatorController.getY()));
 
     configureButtonBindings();
   }
@@ -62,7 +70,9 @@ public class RobotContainer {
 
     /** Sets commands to button presses **/
     //uncomment after testing drive
-    //_AButton.whenPressed(raise);
+    _YButton.whenHeld(raise);
+    _AButton.whenHeld(lower);
+    _StartButton.whenPressed(safemodetoggle);
 
   }
 

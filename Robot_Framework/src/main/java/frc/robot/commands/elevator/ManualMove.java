@@ -3,21 +3,22 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ElevatorSystem;
 
-public class Raise extends CommandBase {
+public class ManualMove extends CommandBase {
     
     private final ElevatorSystem _elevator;
+    private final double _lift;
 
-    public Raise(ElevatorSystem elevator) {
+    public ManualMove(ElevatorSystem elevator, double lift) {
         _elevator = elevator;
+        _lift = lift;
     }
 
     public void execute() {
-        System.out.println("Raise command executed");
-        //_elevator.DriveElevator(1.0f);
+        //System.out.println("Manual moving");
+        _elevator.DriveElevator(_lift);
     }
 
     public void end(boolean interrupted) {
-        System.out.println("Raise stopped");
         _elevator.Stop();
     }
 

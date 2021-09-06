@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import frc.robot.Constants.ElevatorConstants;
+import frc.robot.subsystems.IOSubsystem;
 
 import frc.robot.Subsystem;
 
@@ -65,11 +66,18 @@ public class ElevatorSystem extends SubsystemBase {
         return _mode;
     }
     
-    public void DriveElevator(boolean button_pressed) {
-        if (button_pressed == true) {
-            _top_actuator.set(ElevatorConstants.ELEVATOR_SPEED);
-            _bottom_actuator.set(ElevatorConstants.ELEVATOR_SPEED);
+    public void DriveElevator(double mult) {
+
+        if (!IOSubsystem.safe_state) {
+            _top_actuator.set(ElevatorConstants.ELEVATOR_SPEED * mult);
+            _bottom_actuator.set(ElevatorConstants.ELEVATOR_SPEED * mult);
         }
+        
+    }
+
+    public void Stop() {
+        _top_actuator.stopMotor();
+        _bottom_actuator.stopMotor();
     }
 
     public void setMode() {
