@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import frc.robot.Constants.ElevatorConstants;
 
+import frc.robot.Subsystem;
+
+/** Replace SubsystemBase with just the Subsystem class after testing **/
 public class ElevatorSystem extends SubsystemBase {
 
     public enum ELEVATOR_MODE {
@@ -62,7 +65,14 @@ public class ElevatorSystem extends SubsystemBase {
         return _mode;
     }
     
-    public void DriveElevator() {
+    public void DriveElevator(boolean button_pressed) {
+        if (button_pressed == true) {
+            _top_actuator.set(ElevatorConstants.ELEVATOR_SPEED);
+            _bottom_actuator.set(ElevatorConstants.ELEVATOR_SPEED);
+        }
+    }
+
+    public void setMode() {
 
     }
 

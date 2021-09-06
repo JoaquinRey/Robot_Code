@@ -8,15 +8,20 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 //Subsystems
 import frc.robot.subsystems.DriveSystem;
+import frc.robot.subsystems.ElevatorSystem;
 
 //Constants
 import frc.robot.Constants.IOConstants;
 
 //Commands
 import frc.robot.commands.drive.CartesianDrive;
+import frc.robot.commands.elevator.Raise;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -31,6 +36,14 @@ public class RobotContainer {
   private final Joystick driver_controller = new Joystick(IOConstants.DRIVE_CONTROLLER_PORT);
 
   private final Joystick secondary_controller = new Joystick(IOConstants.SECONDARY_CONTROLLER_PORT);
+
+  private final ElevatorSystem _elevator = new ElevatorSystem();
+
+  private final XboxController ElevatorController = new XboxController(IOConstants.ELEVATOR_CONTROLLER_PORT);
+
+  private final Raise raise = new Raise(_elevator);
+
+  private final JoystickButton _AButton = new JoystickButton(ElevatorController, IOConstants.A_BUTTON);
   
   public RobotContainer() {
     
@@ -45,7 +58,13 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+
+    /** Sets commands to button presses **/
+    //uncomment after testing drive
+    //_AButton.whenPressed(raise);
+
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
