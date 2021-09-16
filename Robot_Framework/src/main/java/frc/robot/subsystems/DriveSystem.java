@@ -41,5 +41,10 @@ public class DriveSystem extends SubsystemBase{
     public void StopDrive() {
         _drive.stopMotor();
     }
+    
+    public double GetAvgOutputCurrent() {
+        return 0f;
+
+    }
 
 }

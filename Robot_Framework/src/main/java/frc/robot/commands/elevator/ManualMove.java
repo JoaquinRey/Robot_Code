@@ -11,6 +11,7 @@ public class ManualMove extends CommandBase {
     public ManualMove(ElevatorSystem elevator, double lift) {
         _elevator = elevator;
         _lift = lift;
+        addRequirements(elevator);
     }
 
     public void execute() {

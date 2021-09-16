@@ -80,6 +80,14 @@ public class ElevatorSystem extends SubsystemBase {
         _bottom_actuator.stopMotor();
     }
 
+    public double[] getPotentiometers() {
+        double[] values = new double[2];
+        values[0] = _top_potentiometer.get();
+        values[1] = _bottom_potentiometer.get();
+        
+        return values;
+    }
+
     public void setMode() {
 
     }

@@ -16,6 +16,7 @@ public class CartesianDrive extends CommandBase{
         x_val = _x;
         y_val = _y;
         z_val = _z;
+        addRequirements(drive);
     }
 
 
