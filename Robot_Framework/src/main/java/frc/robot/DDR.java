@@ -6,13 +6,13 @@ public class DDR extends GenericHID {
     
     public enum Button {
         kLeft(0),
-        kUp(1),
-        kRight(2),
-        kDown(3),
-        kX(4),
-        kO(5),
-        kSq(6),
-        kTr(7),
+        kUp(2),
+        kRight(3),
+        kDown(1),
+        kX(6),
+        kO(7),
+        kSq(5),
+        kTr(4),
         kSelect(8),
         kStart(9);
 
